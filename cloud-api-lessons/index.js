@@ -37,10 +37,10 @@ es.onmessage = function(event) {
     console.log(percent); 
     lastHit = new Date().getTime();
 	  
-	  fetch('https://legocity4.my.salesforce.com/services/data/v42.0/sobjects/Tire_event__e', { 
+	  fetch('https://arcane-wave-26677.herokuapp.com/', { 
   method: 'POST',
-  body: JSON.stringify({"Tire_id__c":"123","Pressure__c":percent}),
-  headers: {'Content-Type': 'application/json', 'authorization': 'Bearer 00Df4000002cqlJ!AREAQAsCFZdD3QvHM4fuMB3O.4FkSTyT1xMNFKINBSou4.YP73qUO9ejnmPelGXx7.N4bwUMxCjqETZWVYIGnzF0JjQYRCiY'},
+  body: JSON.stringify({"Poids_tonnes__c":"percent","username":"romain"}),
+  headers: {'Content-Type': 'application/json'},
 })
   }
 };

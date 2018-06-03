@@ -38,10 +38,18 @@ es.onmessage = function(event) {
     lastHit = new Date().getTime();
 	  
 	  fetch('https://arcane-wave-26677.herokuapp.com/', { 
-  method: 'POST',
-  body: JSON.stringify({"Poids_tonnes__c":"percent","username":"romain"}),
-  headers: {'Content-Type': 'application/json'},
-})
+      method: 'POST',
+      body: JSON.stringify({"Poids_tonnes__c":"percent","username":"romain"}),
+      headers: {'Content-Type': 'application/json'},
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson);
+      return responseJson;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 };
 

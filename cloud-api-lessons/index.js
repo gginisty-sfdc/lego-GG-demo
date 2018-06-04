@@ -22,7 +22,7 @@ const options = { headers: { Authorization: token } };
 const es = new EventSource(url, options);
 
 // time to wait in ms
-const delay = 1000;
+const delay = 30000;
 
 console.log('Hello Hello');
 
@@ -39,7 +39,7 @@ es.onmessage = function(event) {
 	  
 	  fetch('https://arcane-wave-26677.herokuapp.com/', { 
       method: 'POST',
-      body: {"Poids_tonnes__c":percent,"username":"romain"},
+      body: JSON.stringify({"Poids_tonnes__c":percent,"username":"romain"}),
       headers: {'Content-Type':'application/json'},
     })
     .then((response) => response.json())

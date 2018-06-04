@@ -42,11 +42,6 @@ es.onmessage = function(event) {
       body: JSON.stringify({"Poids_tonnes__c":percent,"username":"romain"}),
       headers: {'Content-Type':'application/json'},
     })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log(responseJson);
-      return responseJson;
-    })
     .catch((error) => {
       console.error(error);
     });

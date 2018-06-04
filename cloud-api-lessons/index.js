@@ -32,7 +32,7 @@ es.onmessage = function(event) {
   const percent = JSON.parse(event.data).percent;
   const elapsed = new Date().getTime() - lastHit;
   // be sure to wait a little
-  if (percent !== undefined && elapsed > delay) {
+  if (percent !== undefined && elapsed > delay && percent > 0) {
     // send data to sales force
     console.log(percent); 
     lastHit = new Date().getTime();

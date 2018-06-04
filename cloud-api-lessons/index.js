@@ -40,7 +40,7 @@ es.onmessage = function(event) {
 	  fetch('https://arcane-wave-26677.herokuapp.com/', { 
       method: 'POST',
       body: JSON.stringify({"Poids_tonnes__c":percent,"username":"romain"}),
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type':'application/json'},
     })
     .then((response) => response.json())
     .then((responseJson) => {

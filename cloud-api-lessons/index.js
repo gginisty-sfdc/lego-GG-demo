@@ -22,7 +22,7 @@ const options = { headers: { Authorization: token } };
 const es = new EventSource(url, options);
 
 // time to wait in ms
-const delay = 1000;
+const delay = 15000;
 
 console.log('Hello Hello');
 

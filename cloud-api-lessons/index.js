@@ -32,7 +32,7 @@ es.onmessage = function(event) {
   const percent = JSON.parse(event.data).percent;
   const elapsed = new Date().getTime() - lastHit;
   // be sure to wait a little
-  if (percent !== undefined && elapsed > delay && percent > 0) {
+  if (percent !== undefined && elapsed > delay && percent > 3) {
     // send data to sales force
     console.log(percent); 
     lastHit = new Date().getTime();
@@ -55,71 +55,3 @@ es.onerror = function(e) {
 /* End code from Julien */
 app.listen(port)
 console.log('App booted on port %d', port)
-
-
-
-
-
-/*
-app.use(koaParseJson())
-
-
-
- On a root GET respond with a friendly message explaining that this
-application has no interesting client-side component. 
-
-app.use(route.get('/', function *() {
-
-  this.body = 'Hello, this is a trivial cloudBit Reader App. Nothing else to see here; all the action happens server-side.  To see any recent input activity from webhook-registered cloudBits do this on the command line: `heroku logs --tail`.'
-
-}))
-
-*/
-
-/* On a root POST log info about the (should be) cloudBit event. 
-
-app.use(route.post('/', function *() {
-
-  console.log('received POST: %j', this.request.body)
-
-  if (this.request.body && this.request.body.type) {
-    handleCloudbitEvent(this.request.body)
-  }
-
-  this.body = 'OK'
-
-}))
-
-
-
-app.listen(port)
-console.log('App booted on port %d', port)
-
-
-
-// Helpers
-
-function handleCloudbitEvent(event) {
-  switch (event.type) {
-    case 'amplitude':
-      // Do whatever you want with the amplitde
-      console.log(event.payload)
-      console.log('cloudBit input received: %d%', event.payload.percent)
-      fetch('https://legocity4.my.salesforce.com/services/data/v42.0/sobjects/Tire_event__e', { 
-        method: 'POST',
-        body: JSON.stringify({"Tire_id__c":"123","Tire_id__c":event.payload.percent}),
-        headers: {'Content-Type': 'application/json', 'authorization': 'Bearer 00Df4000002cqlJ!AREAQKXMSdLDur4V1OVzQoHyHfEZHBdOqUlLhTbZfEzYMZ2GhxStlaXoXv3T8G_f8YXSX9iQtDcyVtabc.oFQ71GqyduYX9p'},
-      })
-	      .then(res => res.json())
-        .then(json => console.log("json", json))
-        .catch(err => console.error("err", err));
-      break
-    case 'connectionChange':
-      // One day, cloudBits will emit this event too, but not yet.
-      break
-    default:
-      console.warn('cloudBit sent an unexpected event: %j', event)
-      break
-  }
-}
-*/

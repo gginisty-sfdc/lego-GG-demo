@@ -10,48 +10,39 @@ var app = koa()
 
 /* Beginning code from Julien */
 
-const EventSource = require("eventsource");
+// const EventSource = require("eventsource");
 
 const url = "https://api-http.littlebitscloud.cc/v2/devices/243c201f8634/input";
 
 const token =
   "0818ce2545bb60e2672e5a18a9d7413ecc8534da02785bee59879c0789197143";
 
-const options = { headers: { Authorization: token } };
+// const options = { headers: { Authorization: token } };
 
-const es = new EventSource(url, options);
+// const es = new EventSource(url, options);
 
 // time to wait in ms
 const delay = 15000;
 
-console.log('Hello Hello');
-
 let lastHit = new Date().getTime();
 
-es.onmessage = function(event) {
-  const percent = JSON.parse(event.data).percent;
-  const elapsed = new Date().getTime() - lastHit;
-  // be sure to wait a little
-  if (percent !== undefined && elapsed > delay && percent > 3) {
-    // send data to sales force
-    console.log(percent); 
-    lastHit = new Date().getTime();
-	  
-	  fetch('https://arcane-wave-26677.herokuapp.com/', { 
-      method: 'POST',
-      body: JSON.stringify({"Poids_tonnes__c":percent,"username":"romain"}),
-      headers: {'Content-Type':'application/json'},
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  }
-};
+const percent = JSON.parse(event.data).percent;
+const elapsed = new Date().getTime() - lastHit;
+// be sure to wait a little
+if (percent !== undefined && elapsed > delay && percent > 3) {
+  // send data to sales force
+  console.log('sending request. Poids_tonnes__c = ',percent); 
+  lastHit = new Date().getTime();
+  
+  fetch('https://arcane-wave-26677.herokuapp.com/', { 
+    method: 'POST',
+    body: JSON.stringify({"Poids_tonnes__c":percent,"username":"romain"}),
+    headers: {'Content-Type':'application/json'},
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+}
 
-es.onerror = function(e) {
-  console.log(e);
-};
-
-/* End code from Julien */
 app.listen(port)
 console.log('App booted on port %d', port)

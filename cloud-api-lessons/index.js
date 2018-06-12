@@ -62,7 +62,7 @@ function handleCloudbitEvent(event) {
       if (percent !== undefined && elapsed > delay && percent > 3) {
         fetch('https://arcane-wave-26677.herokuapp.com/', { 
           method: 'POST',
-          body: JSON.stringify({"Poids_tonnes__c":event.payload.percent,"username":"romain"}),
+          body: JSON.stringify({"Poids_tonnes__c":percent,"username":"romain"}),
           headers: {'Content-Type':'application/json'},
         })
           .then(res => res.json())

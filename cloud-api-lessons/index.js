@@ -8,9 +8,17 @@ var fetch = require('node-fetch');
 var port = Number(process.env.PORT) || 7800
 var app = koa() 
 
+app.use(koaParseJson())
+
 /* Beginning code from Julien */
 
 // const EventSource = require("eventsource");
+
+app.use(route.get('/', function *() {
+
+  this.body = 'Hello, this is a trivial cloudBit Reader App. Nothing else to see here; all the action happens server-side.  To see any recent input activity from webhook-registered cloudBits do this on the command line: `heroku logs --tail`.'
+
+}))
 
 const url = "https://api-http.littlebitscloud.cc/v2/devices/243c201f8634/input";
 
@@ -22,7 +30,6 @@ const delay = 15000;
 let lastHit = new Date().getTime();
 
 app.use(route.post('/', function *() {
-  console.log("this.request.body: ",this.request.body);
 
   if (this.request.body && this.request.body.type) {
     

@@ -57,7 +57,7 @@ function handleCloudbitEvent(event) {
       // Do whatever you want with the amplitde
       console.log('inside switch case, event.payload: ',event.payload)
       console.log('cloudBit input received: %d%', event.payload.percent)
-      const percent = JSON.parse(event.data).percent;
+      const percent = event.payload.percent;
       const elapsed = new Date().getTime() - lastHit;
       if (percent !== undefined && elapsed > delay && percent > 3) {
         fetch('https://arcane-wave-26677.herokuapp.com/', { 

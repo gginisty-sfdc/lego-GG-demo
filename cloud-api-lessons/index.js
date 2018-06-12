@@ -22,7 +22,7 @@ const delay = 15000;
 let lastHit = new Date().getTime();
 
 app.use(route.post('/', function *() {
-  console.log('this: ',this);
+  console.log('this: ',this.request.res.json());
 
   console.log('received POST: %j', this.request.body)
 

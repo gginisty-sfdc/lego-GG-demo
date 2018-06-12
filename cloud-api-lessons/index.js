@@ -22,9 +22,10 @@ const delay = 15000;
 let lastHit = new Date().getTime();
 
 app.use(route.post('/', function *() {
+  console.log("this.request.body: ",this.request.body);
 
   if (this.request.body && this.request.body.type) {
-    console.log("handling cloud bit event");
+    
     handleCloudbitEvent(this.request.body)
   }
 

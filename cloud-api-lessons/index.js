@@ -58,8 +58,10 @@ function handleCloudbitEvent(event) {
       console.log('inside switch case, event.payload: ',event.payload)
       console.log('cloudBit input received: %d%', event.payload.percent)
       const percent = event.payload.percent;
+      console.log("percent value: ", percent);
       const elapsed = new Date().getTime() - lastHit;
       if (percent !== undefined && elapsed > delay && percent > 3) {
+        console.log("inside fetch");
         fetch('https://arcane-wave-26677.herokuapp.com/', { 
           method: 'POST',
           body: JSON.stringify({"Poids_tonnes__c":percent,"username":"romain"}),
